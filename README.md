@@ -15,3 +15,7 @@ Lookup cost is paid for every request. Monthly cloud cost is added separately. C
 not assumed staff time. Cash realization is explicit. Payback is null when net benefit is nonpositive;
 NPV discounts month-end cash flows with `(1+annual_rate)^(1/12)-1`. No tax or terminal value is assumed.
 MIT. Business-case formulas are illustrative scenario arithmetic.
+
+`node --test tests/test_model.cjs` checks JavaScript boundaries. Python and browser inputs enforce integer token/request counts. The 1..120 month horizon matches Excel. Boolean, missing and nonfinite inputs are rejected by both code interfaces.
+
+Offline regression checks also run through `.github/workflows/checks.yml` on push and pull request. No model credentials are required.

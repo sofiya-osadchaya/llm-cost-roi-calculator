@@ -24,10 +24,12 @@ class Inputs:
     horizon_months: int=12
     def __post_init__(self):
         for k,v in asdict(self).items():
-            if not isinstance(v,(float,int)) or not math.isfinite(v) or v<0: raise ValueError(f"Invalid {k}")
+            if isinstance(v,bool) or not isinstance(v,(float,int)) or not math.isfinite(v) or v<0: raise ValueError(f"Invalid {k}")
         for k in ("cache_hit_rate","strong_share","cash_realization"):
             if not 0<=getattr(self,k)<=1: raise ValueError(f"Invalid {k}")
-        if self.horizon_months<1 or int(self.horizon_months)!=self.horizon_months: raise ValueError("Invalid horizon")
+        for key in ("monthly_requests","input_tokens","output_tokens","horizon_months"):
+            if not isinstance(getattr(self,key),int): raise ValueError(f"{key} must be an integer")
+        if not 1<=self.horizon_months<=120: raise ValueError("Horizon must be 1..120 months")
 
 def calculate(i):
     small=(i.input_tokens*i.small_input_rate+i.output_tokens*i.small_output_rate)/1e6

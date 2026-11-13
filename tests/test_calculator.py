@@ -11,3 +11,11 @@ class FinanceTests(unittest.TestCase):
         i=Inputs(annual_discount=0);r=calculate(i);self.assertAlmostEqual(r["npv_rub"],r["monthly_net_cash_rub"]*i.horizon_months-i.implementation)
     def test_bad_probability(self):
         with self.assertRaises(ValueError): Inputs(cache_hit_rate=2)
+
+    def test_boolean_rejected(self):
+        with self.assertRaises(ValueError):Inputs(monthly_requests=True)
+    def test_integer_and_horizon_limits(self):
+        for patch in ({"monthly_requests":1.5},{"input_tokens":1.5},{"horizon_months":121},{"horizon_months":1.5}):
+            with self.subTest(patch=patch),self.assertRaises(ValueError):Inputs(**patch)
+    def test_nonfinite_rejected(self):
+        with self.assertRaises(ValueError):Inputs(cloud_monthly=float('nan'))
