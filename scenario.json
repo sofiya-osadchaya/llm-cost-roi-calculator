@@ -1,0 +1,19 @@
+{
+  "monthly_requests": 10000,
+  "input_tokens": 900,
+  "output_tokens": 160,
+  "small_input_rate": 60,
+  "small_output_rate": 120,
+  "strong_input_rate": 700,
+  "strong_output_rate": 1400,
+  "strong_share": 0.25,
+  "cache_hit_rate": 0.3,
+  "lookup_per_request": 0.01,
+  "cloud_monthly": 2000,
+  "hours_saved_monthly": 100,
+  "loaded_hourly_rate": 900,
+  "cash_realization": 0.4,
+  "implementation": 180000,
+  "annual_discount": 0.12,
+  "horizon_months": 12
+}
